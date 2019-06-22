@@ -1,0 +1,93 @@
+<h1>
+    hero-create works!
+</h1>
+  
+<form [formGroup]="angForm" novalidate (ngSubmit)="onSubmit()">
+  <table style="width: 80%">
+    <div class="form-group">
+      <tr>
+        <td><label>Id:</label></td>
+        <td><input class="form-control" formControlName="id" type="number"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <div *ngIf="f.id.invalid && (f.id.dirty || f.id.touched)" class="alert alert-danger">
+              <div *ngIf="f.id.errors.required">
+                Id is required.
+              </div>
+          </div>
+        </td>
+      </tr>        
+    </div>
+
+    <!-- <div *ngIf="angForm.controls['id'].invalid && (angForm.controls['id'].dirty || angForm.controls['id'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['id'].errors.required">
+          Id is required.
+        </div>
+    </div>  -->
+
+    <div class="form-group">
+      <tr>
+        <td><label>Name:</label></td>
+        <td><input class="form-control" formControlName="name" type="text"></td>
+      </tr>
+      <tr>
+          <td></td>
+          <td>
+              <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)" class="alert alert-danger">
+                  <div *ngIf="f.name.errors.required">
+                    Name is required.
+                  </div>
+                  <div *ngIf="f.name.errors.minlength">
+                    Name at least 3 character.
+                  </div>
+                </div>
+            </td>
+        </tr>
+    </div>
+
+    <div class="form-group">
+      <tr>
+        <td><label>Email:</label></td>
+        <td><input class="form-control" formControlName="email" type="text"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)" class="alert alert-danger">
+            <div *ngIf="f.email.errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="f.email.errors.email">
+              Email must be valid email.
+            </div>
+          </div>
+        </td>
+      </tr>
+    </div>
+  </table>
+
+  <button type="submit"
+      [disabled]="angForm.pristine || angForm.invalid" class="btn btn-success">
+      Save
+  </button>
+</form>
+
+<br/>
+
+<a *ngFor="let hero of newHeroList" class="col-1-4">
+  <div class="module hero">
+    <h4>id: {{hero.id}}, name: {{hero.name}}</h4>
+  </div>
+</a>
+
+<p>Form value: {{ angForm.value | json }}</p>
+<p>Form status: {{ angForm.status | json }}</p>
+
+  <!--
+    this.f.id.valid : True if there is no validation check 
+    this.f.id.dirty op pristimne: True if there is changes made op not changes
+    this.f.if.touched: True if the field is clicked
+    this.f.id.errors.required : True if the validation check fail
+  -->

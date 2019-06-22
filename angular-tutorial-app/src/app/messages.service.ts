@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 export class MessagesService {
   messages: String[] = [];
 
-  add(message: string){
+  add(message: string) {
     this.messages.push(message);
   }
 
-  clear(){
+  clear() {
     this.messages = [];
   }
 }
